@@ -1,5 +1,48 @@
 ---
-title: "01_data_import"
-output: html_document
+title: "Data Import"
+output: github_document
 ---
+
+This file is for doing data import.
+
+## Import 2 .csv files
+```{r}
+library("tidyverse")
+```
+
+Import our first dataset.
+
+```{r}
+litters_df = 
+  read.csv(file = "data/FAS_litters.csv")
+
+litters_df = janitor::clean_names(litters_df)
+```
+
+Import the second dataset
+```{r}
+pups_df = 
+  read.csv(file = "data/FAS_pups.csv", skip = 3)
+
+pups_df = janitor::clean_names(pups_df)
+```
+
+
+## Look at the data
+```{r}
+litters_df
+pups_df
+```
+
+Head or tail
+```{r}
+head(litters_df, 20)
+
+tail(pups_df, 5)
+```
+
+Skimming?
+```{r}
+skimr::skim(pups_df)
+```
 
