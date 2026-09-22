@@ -5,7 +5,7 @@ output: github_document
 
 This file is for doing data import.
 
-## Import 2 .csv files
+## Import two .csv files
 ```{r}
 library("tidyverse")
 ```
@@ -14,7 +14,8 @@ Import our first dataset.
 
 ```{r}
 litters_df = 
-  read.csv(file = "data/FAS_litters.csv")
+  read.csv(file = "data/FAS_litters.csv",
+           na = c(" ", ".", "NA"))
 
 litters_df = janitor::clean_names(litters_df)
 ```
@@ -22,7 +23,9 @@ litters_df = janitor::clean_names(litters_df)
 Import the second dataset
 ```{r}
 pups_df = 
-  read.csv(file = "data/FAS_pups.csv", skip = 3)
+  read.csv(file = "data/FAS_pups.csv",
+           skip = 3,
+           na = c(" ", ".", "NA"))
 
 pups_df = janitor::clean_names(pups_df)
 ```
@@ -45,4 +48,5 @@ Skimming?
 ```{r}
 skimr::skim(pups_df)
 ```
+
 
