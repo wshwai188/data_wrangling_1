@@ -3,7 +3,7 @@ Data Import
 
 This file is for doing data import.
 
-## Import 2 .csv files
+## Import two .csv files
 
 ``` r
 library("tidyverse")
@@ -19,6 +19,11 @@ library("tidyverse")
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+library("readxl")
+library("haven")
+```
 
 Import our first dataset.
 
@@ -562,3 +567,56 @@ Data summary
 | pd_eyes       |        13 |          0.96 | 12.99 | 0.62 |  12 |  13 |  13 |  13 |   15 | ▂▇▁▂▁ |
 | pd_pivot      |        13 |          0.96 |  7.09 | 1.51 |   4 |   6 |   7 |   8 |   12 | ▂▇▂▂▁ |
 | pd_walk       |         0 |          1.00 |  9.50 | 1.34 |   7 |   9 |   9 |  10 |   14 | ▆▇▇▂▁ |
+
+## Oh Excel….
+
+Jenny Bryan made `readxl` to solve the problems
+
+``` r
+mlb_df = read_excel("data/mlb11.xlsx")
+```
+
+Look at the data mlb_df
+
+Import FOTR words.
+
+``` r
+fotr_df = 
+  read_excel("data/LotR_Words.xlsx",
+             range = "B3:D6")
+
+fotr_df
+```
+
+    ## # A tibble: 3 × 3
+    ##   Race   Female  Male
+    ##   <chr>   <dbl> <dbl>
+    ## 1 Elf      1229   971
+    ## 2 Hobbit     14  3644
+    ## 3 Man         0  1995
+
+``` r
+tt_df = 
+  read_excel("data/LotR_Words.xlsx",
+             range = "F3:H6")
+
+tt_df
+```
+
+    ## # A tibble: 3 × 3
+    ##   Race   Female  Male
+    ##   <chr>   <dbl> <dbl>
+    ## 1 Elf       331   513
+    ## 2 Hobbit      0  2463
+    ## 3 Man       401  3589
+
+## Import SAS
+
+Read in the PULSE dataset
+
+``` r
+pulse_df =
+  read_sas("data/public_pulse_data.sas7bdat")
+
+pulse_df = janitor::clean_names(pulse_df)
+```
